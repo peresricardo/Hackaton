@@ -1,15 +1,13 @@
 package br.com.fiap.srvCartao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_cartao")
@@ -20,6 +18,10 @@ import java.math.BigDecimal;
 public class Cartao {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(name = "cpf", nullable = false)
     private String cpf;
     @Column(name = "limite", nullable = false)
     private BigDecimal limite;
