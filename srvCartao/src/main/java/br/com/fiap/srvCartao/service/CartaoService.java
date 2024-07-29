@@ -5,4 +5,5 @@ import br.com.fiap.srvCartao.model.Cartao;
 public interface CartaoService {
 
     Cartao cadastrarCartao(Cartao cartao);
+    Cartao obterCartaoPorNumero(String numero);
 }

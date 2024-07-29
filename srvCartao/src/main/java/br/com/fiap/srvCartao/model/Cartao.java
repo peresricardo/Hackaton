@@ -28,7 +28,7 @@ public class Cartao {
     @Column(name = "numero", nullable = false)
     private String numero;
     @Column(name = "data_validade", nullable = false)
-    private String dataValidade;
+    private String data_validade;
     @Column(name = "cvv", nullable = false)
     private String cvv;
 }

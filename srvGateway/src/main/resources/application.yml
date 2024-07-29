@@ -2,6 +2,20 @@ spring:
   application:
     name: srvGateway
 
+  cloud:
+    gateway:
+      routes:
+        - id: tbsrvcliente
+          uri: lb://srvcliente
+          predicates:
+            - Path=/api/cliente/**
+
+        - id: tbsrvcartao
+          uri: lb://srvcartao
+          predicates:
+            - Path=/api/cartao/**
+
+
 server:
   port: 8080
 
@@ -12,4 +26,3 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://srv-discovery:8761/eureka
-

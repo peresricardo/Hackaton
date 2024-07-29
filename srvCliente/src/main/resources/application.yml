@@ -1,6 +1,6 @@
 spring:
   application:
-    name: srvCartao
+    name: srvCliente
   # Postgresql
   datasource:
     url: jdbc:postgresql://postgres-db:5432/haka
@@ -8,7 +8,7 @@ spring:
     password: Postgres2024!
 
     hikari:
-      schema: dbCartoes
+      schema: dbClientes
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,7 +18,7 @@ spring:
           create-database-schemas: true
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: dbCartoes
+        default_schema: dbClientes
         jdbc:
           lob:
             non_contextual_creation: true
@@ -28,7 +28,7 @@ spring:
 
 # Others
 server:
-  port: 9511
+  port: 9510
 
 # Eureka
 eureka:
