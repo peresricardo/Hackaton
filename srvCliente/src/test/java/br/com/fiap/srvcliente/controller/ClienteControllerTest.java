@@ -4,7 +4,6 @@ import br.com.fiap.srvcliente.dto.ClienteDto;
 import br.com.fiap.srvcliente.exception.GlobalExceptionHandler;
 import br.com.fiap.srvcliente.service.ClienteService;
 import br.com.fiap.srvcliente.utils.ClienteHelper;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
