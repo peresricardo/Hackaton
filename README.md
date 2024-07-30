@@ -15,10 +15,7 @@ Todos os nossos micro-serviços foram desenvolvidos utlizando a versão <b>21 do
 git clone https://github.com/peresricardo/Hackaton.git
 ```
 ### Docker
-Criar a rede para utilização dos serviços
-```sh
-docker network create hackatonnetwork
-```
+
 #### Limpar, compilar e gerar imagem para o docker
 
 Na raiz do projeto existe um arquivo chamado buildAll.bat, executando esse arquivo ele irá
