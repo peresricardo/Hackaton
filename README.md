@@ -18,3 +18,19 @@ Criar a rede para utilização dos serviços
 ```sh
 docker network create hackatonnetwork
 ```
+### Limpar, compilar e gerar imagem para o docker
+
+Na raiz do projeto existe um arquivo chamado buildAll.bat, executando esse arquivo ele irá
+fazer o build, gerar a imagem docker automaticamente de todos os serviços.
+
+Para executar o arquivo buildAll.bat execute um prompt de command "cmd"
+vá para a pasta onde baixou o projeto e execute o comando:
+```sh
+buildAll
+```
+
+Para executar os serviços de uma única vez execute o docker compose,
+vá para pasta do projeto e execute o comando:
+```sh
+docker-compose up -d
+```
