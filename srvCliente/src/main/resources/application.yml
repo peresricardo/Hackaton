@@ -30,6 +30,18 @@ spring:
 server:
   port: 9510
 
+# Swagger
+openapi:
+  service:
+    title: service-cliente doc
+    version: 1.0.0
+    url: localhost:8080
+springdoc:
+  api-docs:
+    path: /api/cliente/api-docs
+  swagger-ui:
+    path: /api/cliente/swagger-ui.html
+
 # Eureka
 eureka:
   client:
