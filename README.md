@@ -1,7 +1,7 @@
 # Hackaton
 
 <hr>
-Todos os nossos micro-serviços foram desenvolvidos utlizando a versão <b>21 do Java - AmazonCorretto.</b>
+Todos os micros serviços foram desenvolvidos utlizando a versão <b>21 do Java - AmazonCorretto.</b>
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
@@ -14,6 +14,37 @@ Todos os nossos micro-serviços foram desenvolvidos utlizando a versão <b>21 do
 - Microserviço de Clientes - http://localhost:8080/api/cliente/swagger-ui.html
 - Microserviço de Cartões - http://localhost:8080/api/cartao/swagger-ui.html
 
+
+## Serviços em nossa aplicação
+- [x] PostgreSql
+- [x] Pgadmin
+- [x] Service-Discovery
+- [x] Service-Gateway
+- [ ] Service-Autenticacao
+- [x] Service-Cliente
+- [x] Service-Cartao
+- [ ] Service-Pagamento
+
+<hr>
+
+## PostgreSql
+Utilizamos a última imagem do Postgre em container para que seja possível efetuar a persistencia de dados dos microserviços utilizados nesse projeto.<br>
+Para simular um banco de dados para cada serviço, utilizamos a criação de <strong>Schemas</strong> para dividir o banco de dados.<br>
+### Schemas
+- dbClientes
+- dbcartoes
+- dbPagamentos
+
+## 💻 Configuração Pgadmin
+- pgadmin: http://localhost:15432/<br>
+  ![img_1.png](img_1.png)
+  <br><strong>Configuração do servidor</strong>
+  <br>Host name/address: postgres-db
+  <br>Username: postgres
+  <br>Password: Postgres2024!
+  ![img.png](img.png)
+
+<hr>
 
 ## 🔧 Instalação
 

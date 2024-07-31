@@ -10,6 +10,7 @@ pause
 cls
 echo #############################
 echo ### Gerando imagem Docker ###
+echo ###      srvDiscovery     ###
 echo #############################
 call docker image build -t srv-discovery .
 pause
@@ -28,6 +29,7 @@ pause
 cls
 echo #############################
 echo ### Gerando imagem Docker ###
+echo ###       srvGateway      ###
 echo #############################
 call docker image build -t srv-gateway .
 pause
@@ -46,6 +48,7 @@ pause
 cls
 echo #############################
 echo ### Gerando imagem Docker ###
+echo ###       srvCliente      ###
 echo #############################
 call docker image build -t srv-cliente .
 pause
@@ -63,6 +66,7 @@ pause
 cls
 echo #############################
 echo ### Gerando imagem Docker ###
+echo ###       srvCartao       ###
 echo #############################
 call docker image build -t srv-cartao .
 pause
