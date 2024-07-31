@@ -9,6 +9,12 @@ Todos os nossos micro-serviços foram desenvolvidos utlizando a versão <b>21 do
 
 [![My Skills](https://skillicons.dev/icons?i=docker,&perline=3)](https://skillicons.dev)
 
+
+## 📑 Swagger Documentação
+- Microserviço de Clientes - http://localhost:8080/api/cliente/swagger-ui.html
+- Microserviço de Cartões - http://localhost:8080/api/cartão/swagger-ui.html
+
+
 ## 🔧 Instalação
 
 ```shell
