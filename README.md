@@ -12,7 +12,7 @@ Todos os nossos micro-serviços foram desenvolvidos utlizando a versão <b>21 do
 
 ## 📑 Swagger Documentação
 - Microserviço de Clientes - http://localhost:8080/api/cliente/swagger-ui.html
-- Microserviço de Cartões - http://localhost:8080/api/cartão/swagger-ui.html
+- Microserviço de Cartões - http://localhost:8080/api/cartao/swagger-ui.html
 
 
 ## 🔧 Instalação
