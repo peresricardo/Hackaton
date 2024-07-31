@@ -6,6 +6,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 public class MainAppTest {
     @Test
     public void main(){
@@ -17,5 +19,11 @@ public class MainAppTest {
 
             mocked.verify(() -> SpringApplication.run(SrvGatewayApplication.class, new String[]{}));
         }
+    }
+
+    @Test
+    public void validarTestApp() {
+        String[] args = {};
+        assertDoesNotThrow(() -> SrvGatewayApplication.main(args));
     }
 }

@@ -78,6 +78,7 @@ docker-compose up -d
 
 ```sh
 mvn test
+mvn clean jacoco:prepare-agent install jacoco:report
 ```
 - Para executar os testes integrados:
 ```sh

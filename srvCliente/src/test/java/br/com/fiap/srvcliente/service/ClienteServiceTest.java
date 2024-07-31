@@ -1,16 +1,19 @@
 package br.com.fiap.srvcliente.service;
 
 import br.com.fiap.srvcliente.dto.ClienteDto;
+import br.com.fiap.srvcliente.exception.MensagemFoundException;
 import br.com.fiap.srvcliente.exception.MensagemNotFoundException;
 import br.com.fiap.srvcliente.model.ClienteModel;
 import br.com.fiap.srvcliente.repository.ClienteRepository;
 import br.com.fiap.srvcliente.service.serviceImpl.ClienteServiceImpl;
 import br.com.fiap.srvcliente.utils.ClienteHelper;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,6 +68,18 @@ public class ClienteServiceTest {
             assertThat(clienteRegistrado.nome()).isEqualTo(cliente.getNome());
             assertThat(clienteRegistrado.email()).isEqualTo(cliente.getEmail());
             verify(clienteRepository, times(1)).save(any(ClienteModel.class));
+        }
+
+        @Test
+        public void naoDevePermitirCadastrarCliente() {
+            var cliente = ClienteHelper.gerarRegistro();
+            var dto = ClienteDto.fromEntity(cliente);
+
+            when(clienteRepository.existsByCpf(dto.cpf())).thenReturn(true);
+
+            Assertions.assertThrows(MensagemFoundException.class, () -> {
+                clienteService.cadastrarCliente(dto);
+            });
         }
     }
 
