@@ -8,10 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cartao")
@@ -26,5 +25,12 @@ public class CartaoController {
     public ResponseEntity<Cartao> cadastrarCartao(@Valid @RequestBody Cartao cartao) {
         var cartaoNovo = cartaoService.cadastrarCartao(cartao);
         return ResponseEntity.status(HttpStatus.CREATED).body(cartaoNovo);
+    }
+
+    @GetMapping("/{cpf}")
+    @Operation(summary = "Obtem os cartões cadastrados efetuando a busca por Cpf", method = "GET")
+    public ResponseEntity<List<Cartao>> buscarCartaoPorCpf(@PathVariable String cpf) {
+        var cartao = cartaoService.buscarCartaoPorCpf(cpf);
+        return ResponseEntity.status(HttpStatus.OK).body(cartao);
     }
 }

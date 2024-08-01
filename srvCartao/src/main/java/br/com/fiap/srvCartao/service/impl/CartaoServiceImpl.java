@@ -10,6 +10,8 @@ import br.com.fiap.srvCartao.service.ClienteEndpointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CartaoServiceImpl implements CartaoService {
@@ -43,6 +45,14 @@ public class CartaoServiceImpl implements CartaoService {
         }
 
         return entity;
+    }
+
+    @Override
+    public List<Cartao> buscarCartaoPorCpf(String cpf) {
+        if (!verificaClienteExiste(cpf)) {
+            throw new MensagemNotFoundException("Cliente não encontrado");
+        }
+        return cartaoRepository.findByCpf(cpf);
     }
 
     private Boolean verificaClienteExiste(String cpf) {
