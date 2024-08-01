@@ -1,0 +1,44 @@
+spring:
+    application:
+        name: srvPagamento
+    # h2
+    datasource:
+        url: jdbc:h2:mem:pagamentodb
+        username: sa
+        password:
+        driverClassName: org.h2.Driver
+
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+        show-sql: false
+        generate-ddl: true
+    h2:
+        console:
+            path: /h2-console
+
+# Others
+server:
+    port: 9090
+
+# Swagger
+openapi:
+    service:
+        title: service-pagamento doc
+        version: 1.0.0
+        url: localhost:8080
+springdoc:
+    api-docs:
+        path: /api/pagamento/api-docs
+    swagger-ui:
+        path: /api/pagamento/swagger-ui.html
+
+# Eureka
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            #defaultZone: http://srv-discovery:8761/eureka
+            defaultZone: http://localhost:8761/eureka
