@@ -9,4 +9,6 @@ public interface CartaoService {
     Cartao cadastrarCartao(Cartao cartao);
     Cartao obterCartaoPorNumero(String numero);
     List<Cartao> buscarCartaoPorCpf(String cpf);
+    Cartao atualizarCartao(String numero, Cartao cartaoAtualizado);
+    void deletarCartao(String numero);
 }

@@ -27,10 +27,32 @@ public class CartaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartaoNovo);
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/cpf/{cpf}")
     @Operation(summary = "Obtem os cartões cadastrados efetuando a busca por Cpf", method = "GET")
     public ResponseEntity<List<Cartao>> buscarCartaoPorCpf(@PathVariable String cpf) {
         var cartao = cartaoService.buscarCartaoPorCpf(cpf);
         return ResponseEntity.status(HttpStatus.OK).body(cartao);
     }
+
+    @GetMapping("/numero/{numero}")
+    @Operation(summary = "Obtem o cartão cadastrado efetuando a busca por Número de Cartão", method = "GET")
+    public ResponseEntity<Cartao> obterCartaoPorNumero(@PathVariable String numero) {
+        var cartao = cartaoService.obterCartaoPorNumero(numero);
+        return ResponseEntity.status(HttpStatus.OK).body(cartao);
+    }
+
+    @PutMapping("/{numero}")
+    @Operation(summary = "Atualiza dados de cartão cadastrado efetuando a busca por Número de Cartão", method = "PUT")
+    public ResponseEntity<Cartao> atualizarCartao(@PathVariable String numero, @Valid @RequestBody Cartao cartao) {
+        Cartao atualizado = cartaoService.atualizarCartao(numero, cartao);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @DeleteMapping("/{numero}")
+    @Operation(summary = "Deleta cartão cadastrado efetuando a busca por Número de Cartão", method = "DELETE")
+    public ResponseEntity<Void> deletarCartao(@PathVariable String numero) {
+        cartaoService.deletarCartao(numero);
+        return ResponseEntity.noContent().build();
+    }
+
 }

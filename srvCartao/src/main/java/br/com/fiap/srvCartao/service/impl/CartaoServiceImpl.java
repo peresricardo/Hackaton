@@ -55,6 +55,33 @@ public class CartaoServiceImpl implements CartaoService {
         return cartaoRepository.findByCpf(cpf);
     }
 
+    @Override
+    public Cartao atualizarCartao(String numero, Cartao cartaoAtualizado) {
+        Cartao cartaoExistente = cartaoRepository.findByNumero(numero);
+
+        if (cartaoExistente != null) {
+            cartaoExistente.setCpf(cartaoAtualizado.getCpf());
+            cartaoExistente.setLimite(cartaoAtualizado.getLimite());
+            cartaoExistente.setData_validade(cartaoAtualizado.getData_validade());
+            cartaoExistente.setCvv(cartaoAtualizado.getCvv());
+            return cartaoRepository.save(cartaoExistente);
+        } else {
+            throw new MensagemNotFoundException("Cartão não encontrado com esse número");
+        }
+    }
+
+    @Override
+    public void deletarCartao(String numero) {
+        Cartao cartaoExistente = cartaoRepository.findByNumero(numero);
+
+        if (cartaoExistente != null) {
+            cartaoRepository.delete(cartaoExistente);
+        } else {
+            throw new MensagemNotFoundException("Cartão não encontrado com esse número");
+        }
+    }
+
+
     private Boolean verificaClienteExiste(String cpf) {
         System.out.println("Acessando endopoint cliente");
         try {
