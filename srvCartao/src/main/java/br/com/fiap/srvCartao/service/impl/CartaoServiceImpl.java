@@ -8,10 +8,12 @@ import br.com.fiap.srvCartao.repository.CartaoRepository;
 import br.com.fiap.srvCartao.service.CartaoService;
 import br.com.fiap.srvCartao.service.ClienteEndpointService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CartaoServiceImpl implements CartaoService {
@@ -31,7 +33,7 @@ public class CartaoServiceImpl implements CartaoService {
         }
 
         if (cartaoRepository.countCartaoByCpf(cartao.getCpf()) >= 2) {
-            throw new MensagemForBidden("Não é possivel cadastrar mais cartões para esse cpf. Limite máximo atingido! ");
+            throw new MensagemForBidden("Não é possivel cadastrar mais cartões para esse cpf. Limite máximo atingido!");
         }
 
         return cartaoRepository.save(cartao);
@@ -60,7 +62,6 @@ public class CartaoServiceImpl implements CartaoService {
         Cartao cartaoExistente = cartaoRepository.findByNumero(numero);
 
         if (cartaoExistente != null) {
-            cartaoExistente.setCpf(cartaoAtualizado.getCpf());
             cartaoExistente.setLimite(cartaoAtualizado.getLimite());
             cartaoExistente.setData_validade(cartaoAtualizado.getData_validade());
             cartaoExistente.setCvv(cartaoAtualizado.getCvv());
@@ -81,13 +82,12 @@ public class CartaoServiceImpl implements CartaoService {
         }
     }
 
-
     private Boolean verificaClienteExiste(String cpf) {
-        System.out.println("Acessando endopoint cliente");
+        log.info("Acessando endopoint cliente");
         try {
             return clienteService.existeCliente(cpf).getBody();
         } catch (Exception e) {
-            System.out.println("Falha ao acessar endopoint cliente. Erro: " + e.getMessage());
+            log.error("Falha ao acessar endopoint cliente. Erro: {}", e.getMessage());
             throw new RuntimeException("Falha ao acessar endopoint cliente.");
         }
     }
