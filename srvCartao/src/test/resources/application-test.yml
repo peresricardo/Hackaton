@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: srvCartaoTest
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      schema: public
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      jakarta:
+        persistence:
+          create-database-schemas: true
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    generate-ddl: true
