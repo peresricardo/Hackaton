@@ -89,6 +89,22 @@ services:
     networks:
       - hakanetwork
 
+  srv-pagamento:
+    build: './srvPagamento'
+    container_name: srv-pagamento
+    restart: always
+    ports:
+      - 9512:8080
+    depends_on:
+      - postgres-db
+      - pgadmin
+      - srv-discovery
+      - srv-gateway
+      - srv-cliente
+      - srv-cartao
+    networks:
+      - hakanetwork
+
 networks:
   hakanetwork:
     driver: bridge

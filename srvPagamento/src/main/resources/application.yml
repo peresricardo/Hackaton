@@ -1,26 +1,33 @@
 spring:
     application:
         name: srvPagamento
-    # h2
+    # Postgresql
     datasource:
-        url: jdbc:h2:mem:pagamentodb
-        username: sa
-        password:
-        driverClassName: org.h2.Driver
+        url: jdbc:postgresql://postgres-db:5432/haka
+        username: postgres
+        password: Postgres2024!
 
+        hikari:
+            schema: dbPagamentos
     jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
             ddl-auto: update
+        properties:
+            jakarta:
+                persistence:
+                    create-database-schemas: true
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                default_schema: dbPagamentos
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
         show-sql: false
         generate-ddl: true
-    h2:
-        console:
-            path: /h2-console
 
 # Others
 server:
-    port: 9090
+    port: 9512
 
 # Swagger
 openapi:
@@ -30,9 +37,9 @@ openapi:
         url: localhost:8080
 springdoc:
     api-docs:
-        path: /api/pagamento/api-docs
+        path: /api/pagamentos/api-docs
     swagger-ui:
-        path: /api/pagamento/swagger-ui.html
+        path: /api/pagamentos/swagger-ui.html
 
 # Eureka
 eureka:
@@ -40,5 +47,4 @@ eureka:
         register-with-eureka: true
         fetch-registry: true
         service-url:
-            #defaultZone: http://srv-discovery:8761/eureka
-            defaultZone: http://localhost:8761/eureka
+            defaultZone: http://srv-discovery:8761/eureka

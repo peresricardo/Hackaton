@@ -23,7 +23,7 @@ Todos os micros serviços foram desenvolvidos utlizando a versão <b>21 do Java 
 - [ ] Service-Autenticacao
 - [x] Service-Cliente
 - [x] Service-Cartao
-- [ ] Service-Pagamento
+- [x] Service-Pagamento
 
 <hr>
 

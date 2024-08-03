@@ -72,3 +72,22 @@ call docker image build -t srv-cartao .
 pause
 echo ### Fim Compilacao srvCartao ###
 cd ..
+
+
+cls
+echo ###############################
+echo ### Compilando srvPagamento ###
+echo ###############################
+cd srvPagamento
+rmdir /s /q target
+call mvn clean install -U
+pause
+cls
+echo #############################
+echo ### Gerando imagem Docker ###
+echo ###     srvPagamento      ###
+echo #############################
+call docker image build -t srv-pagamento .
+pause
+echo ### Fim Compilacao srvPagamento ###
+cd ..

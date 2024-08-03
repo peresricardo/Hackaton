@@ -15,6 +15,10 @@ spring:
           predicates:
             - Path=/api/cartao/**
 
+        - id: tbsrvpagamento
+          uri: lb://srvpagamento
+          predicates:
+            - Path=/api/pagamentos/**
 
 server:
   port: 8080

@@ -31,7 +31,7 @@ public class PagamentoController {
     @Operation(summary = "Lista Pagamentos de um determinado cliente", method = "GET")
     public ResponseEntity<List<PagamentoPorClienteDto>> listaPagamentosPorCliente(@PathVariable String cpf) {
         List<PagamentoPorClienteDto> pagamentos = pagamentoService.listaPagamentosPorCliente(cpf);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pagamentos);
+        return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
     }
 
 }
