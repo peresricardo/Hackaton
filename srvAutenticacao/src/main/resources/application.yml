@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: srvCartao
+  # Postgresql
+  datasource:
+    url: jdbc:postgresql://postgres-db:5432/haka
+    username: postgres
+    password: Postgres2024!
+
+    hikari:
+      schema: dbCartoes
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      jakarta:
+        persistence:
+          create-database-schemas: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: dbCartoes
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+    generate-ddl: true
+
+
+# Others
+server:
+  port: 9511
+
+# Swagger
+openapi:
+  service:
+    title: service-cartao doc
+    version: 1.0.0
+    url: localhost:8080
+springdoc:
+  api-docs:
+    path: /api/cartao/api-docs
+  swagger-ui:
+    path: /api/cartao/swagger-ui.html
+
+# Eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://srv-discovery:8761/eureka
