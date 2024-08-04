@@ -30,7 +30,7 @@ public class Pagamento {
     @Pattern(regexp = "\\d{11}", message = "O CPF deve conter 11 dígitos")
     private String cpf;
 
-    @Column(name = "chave_pagamento", nullable = false, unique = true)
+    @Column(name = "numero", nullable = false, unique = true)
     @NotNull(message = "O número do cartão não pode ser nulo")
     @Pattern(regexp = "\\d{16}", message = "O número do cartão deve conter 16 dígitos")
     private String numero;
