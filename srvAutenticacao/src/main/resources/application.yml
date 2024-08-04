@@ -1,6 +1,9 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
   application:
-    name: srvCartao
+    name: SrvAutenticacao
   # Postgresql
   datasource:
     url: jdbc:postgresql://postgres-db:5432/haka
@@ -8,7 +11,7 @@ spring:
     password: Postgres2024!
 
     hikari:
-      schema: dbCartoes
+      schema: dbClientes
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,7 +21,7 @@ spring:
           create-database-schemas: true
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: dbCartoes
+        default_schema: dbClientes
         jdbc:
           lob:
             non_contextual_creation: true
@@ -28,19 +31,8 @@ spring:
 
 # Others
 server:
-  port: 9511
+  port: 9513
 
-# Swagger
-openapi:
-  service:
-    title: service-cartao doc
-    version: 1.0.0
-    url: localhost:8080
-springdoc:
-  api-docs:
-    path: /api/cartao/api-docs
-  swagger-ui:
-    path: /api/cartao/swagger-ui.html
 
 # Eureka
 eureka:
@@ -49,3 +41,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://srv-discovery:8761/eureka
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:batman batman batman}

@@ -1,7 +1,7 @@
 services:
   postgres-db:
     image: postgres:latest
-    container_name: haka-postgres
+    container_name: postgres-db
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -95,6 +95,22 @@ services:
     restart: always
     ports:
       - 9512:8080
+    depends_on:
+      - postgres-db
+      - pgadmin
+      - srv-discovery
+      - srv-gateway
+      - srv-cliente
+      - srv-cartao
+    networks:
+      - hakanetwork
+
+  srv-autenticacao:
+    build: './srvAutenticacao'
+    container_name: srv-autenticacao
+    restart: always
+    ports:
+      - 9513:8080
     depends_on:
       - postgres-db
       - pgadmin

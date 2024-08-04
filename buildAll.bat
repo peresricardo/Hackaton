@@ -91,3 +91,21 @@ call docker image build -t srv-pagamento .
 pause
 echo ### Fim Compilacao srvPagamento ###
 cd ..
+
+cls
+echo ###############################
+echo ### Compilando srvAutenticacao ###
+echo ###############################
+cd srvAutenticacao
+rmdir /s /q target
+call mvn clean install -U
+pause
+cls
+echo #############################
+echo ### Gerando imagem Docker ###
+echo ###     srvAutenticacao      ###
+echo #############################
+call docker image build -t srv-autenticacao .
+pause
+echo ### Fim Compilacao srvAutenticacao ###
+cd ..

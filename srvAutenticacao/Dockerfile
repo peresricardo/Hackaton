@@ -1,6 +1,6 @@
 FROM amazoncorretto:21-alpine-jdk
 
-EXPOSE 9898
+EXPOSE 9513
 
 ARG JAR_FILE=target/srvAutenticacao-0.0.1-SNAPSHOT.jar
 

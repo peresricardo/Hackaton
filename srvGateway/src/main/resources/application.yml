@@ -20,6 +20,13 @@ spring:
           predicates:
             - Path=/api/pagamentos/**
 
+        - id: tbsrvautenticacao
+          uri: lb://srvautenticacao
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8080
 
@@ -30,3 +37,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://srv-discovery:8761/eureka
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:batman batman batman}

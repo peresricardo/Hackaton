@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fiap.srvautenticacao.model.User;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 //@Tag(name = "Autenticação", description = "Endpoint para registro de usuários, login e validação de token")
 public class AuthenticationController {
 
