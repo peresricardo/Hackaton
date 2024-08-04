@@ -23,10 +23,10 @@ public class SwaggerConfig {
         contact.setName("Contato");
 
         Info info = new Info()
-                .title("Tech Challenge Fase V")
+                .title("Hackathon FIAP Pos-Tech - Serviço Cliente")
                 .version("1.0")
                 .contact(contact)
-                .description("Documentação dos endpoints da última fase. Fase V - Microserviços");
+                .description("Documentação dos endpoints da Hackathon FIAP Pos-Tech");
 
 
         return new OpenAPI().info(info).servers(List.of(devServer));

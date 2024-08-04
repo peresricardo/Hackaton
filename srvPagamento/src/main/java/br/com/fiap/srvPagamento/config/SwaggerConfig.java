@@ -23,7 +23,7 @@ public class SwaggerConfig {
         contact.setName("Contato");
 
         Info info = new Info()
-                .title("Hackathon FIAP Pos-Tech")
+                .title("Hackathon FIAP Pos-Tech - Serviço Pagamento")
                 .version("1.0")
                 .contact(contact)
                 .description("Documentação dos endpoints da Hackathon FIAP Pos-Tech");

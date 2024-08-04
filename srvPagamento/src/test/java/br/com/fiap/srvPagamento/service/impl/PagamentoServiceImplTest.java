@@ -191,4 +191,18 @@ class PagamentoServiceImplTest {
         assertEquals("compra", dto2.getDescricao());
         assertEquals("aprovado", dto2.getStatus());
     }
+
+    @Test
+    void verificaClienteExiste_FalhaNaComunicacao() {
+        String cpf = "12345678900";
+        Pagamento pagamento = new Pagamento();
+        pagamento.setCpf(cpf);
+        pagamento.setNumero("4111111111111111");
+        pagamento.setCvv("123");
+        pagamento.setValor(new BigDecimal("100"));
+
+        when(clienteService.existeCliente(cpf)).thenThrow(new RuntimeException("Falha ao acessar endpoint cliente"));
+
+        assertThrows(RuntimeException.class, () -> pagamentoService.cadastrarPagamento(pagamento));
+    }
 }
