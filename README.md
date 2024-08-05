@@ -11,6 +11,7 @@ Todos os micros serviços foram desenvolvidos utlizando a versão <b>21 do Java 
 
 
 ## 📑 Swagger Documentação
+- Microserviço de Autenticação - http://localhost:8080/api/auth/swagger-ui.html
 - Microserviço de Clientes - http://localhost:8080/api/cliente/swagger-ui.html
 - Microserviço de Cartões - http://localhost:8080/api/cartao/swagger-ui.html
 - Microserviço de Pagamentos - http://localhost:8080/api/pagamentos/swagger-ui.html

@@ -5,6 +5,8 @@ import com.fiap.srvautenticacao.request.UserAuthRequest;
 import com.fiap.srvautenticacao.request.UserRequest;
 import com.fiap.srvautenticacao.response.UserResponse;
 import com.fiap.srvautenticacao.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ import com.fiap.srvautenticacao.model.User;
 
 @RestController
 @RequestMapping("/api/auth")
-//@Tag(name = "Autenticação", description = "Endpoint para registro de usuários, login e validação de token")
+@Tag(name = "Autenticação", description = "Endpoint para registro de usuários, login e validação de token")
 public class AuthenticationController {
 
     @Autowired
@@ -29,7 +31,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-   // @Operation(summary = "Efetua o login", method = "POST")
+    @Operation(summary = "Efetua o login", method = "POST")
     public ResponseEntity login(@RequestBody @Valid UserAuthRequest data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -40,7 +42,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-   // @Operation(summary = "Registra um novo usuário", method = "POST")
+    @Operation(summary = "Registra um novo usuário", method = "POST")
     public ResponseEntity register(@RequestBody @Valid UserRequest data){
         if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 

@@ -30,6 +30,17 @@ spring:
 server:
   port: 9513
 
+# Swagger
+openapi:
+  service:
+    title: service-autenticacao doc
+    version: 1.0.0
+    url: localhost:8080
+springdoc:
+  api-docs:
+    path: /api/auth/api-docs
+  swagger-ui:
+    path: /api/auth/swagger-ui.html
 
 # Eureka
 eureka:

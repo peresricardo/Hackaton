@@ -53,7 +53,7 @@ springdoc:
     path: /swagger-ui.html
     config-url: /api-docs/swagger-config
     urls:
-      - url: /auth/api-docs
+      - url: /api/auth/api-docs
         name: Autenticacao Service
       - url: /users/api-docs
         name: Usuario Service
