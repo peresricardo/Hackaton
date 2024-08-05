@@ -9,16 +9,22 @@ spring:
           uri: lb://srvcliente
           predicates:
             - Path=/api/cliente/**
+          filters:
+            - AuthenticationFilter
 
         - id: tbsrvcartao
           uri: lb://srvcartao
           predicates:
             - Path=/api/cartao/**
+          filters:
+            - AuthenticationFilter
 
         - id: tbsrvpagamento
           uri: lb://srvpagamento
           predicates:
             - Path=/api/pagamentos/**
+          filters:
+            - AuthenticationFilter
 
         - id: tbsrvautenticacao
           uri: lb://srvautenticacao
@@ -37,6 +43,26 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://srv-discovery:8761/eureka
+
+# Swagger
+springdoc:
+  api-docs:
+    enable: true
+  swagger-ui:
+    enable: true
+    path: /swagger-ui.html
+    config-url: /api-docs/swagger-config
+    urls:
+      - url: /auth/api-docs
+        name: Autenticacao Service
+      - url: /users/api-docs
+        name: Usuario Service
+      - url: /api/cliente/api-docs
+        name: Cliente Service
+      - url: /api/cartao/api-docs
+        name: Cartao Service
+      - url: /api/pagamentos/api-docs
+        name: Pagamento Service
 
 api:
   security:

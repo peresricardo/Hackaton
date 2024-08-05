@@ -1,7 +1,4 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
-    web-application-type: reactive
   application:
     name: SrvAutenticacao
   # Postgresql
@@ -11,7 +8,7 @@ spring:
     password: Postgres2024!
 
     hikari:
-      schema: dbClientes
+      schema: dbUsuarios
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,7 +18,7 @@ spring:
           create-database-schemas: true
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: dbClientes
+        default_schema: dbUsuarios
         jdbc:
           lob:
             non_contextual_creation: true

@@ -13,13 +13,17 @@ public class RouteValidator {
             "/api/auth/register",
             "/api/auth/login",
 
-            "/clientes/swagger-ui/**",
-            "/clientes/swagger-ui.html",
-            "/clientes/api-docs",
+            "/api/cliente/swagger-ui/**",
+            "/api/cliente/swagger-ui.html",
+            "/api/cliente/api-docs",
 
-            "/itens/swagger-ui/**",
-            "/itens/swagger-ui.html",
-            "/itens/api-docs",
+            "/api/cartao/swagger-ui/**",
+            "/api/cartao/swagger-ui.html",
+            "/api/cartao/api-docs",
+
+            "/api/pagamentos/swagger-ui/**",
+            "/api/pagamentos/swagger-ui.html",
+            "/api/pagamentos/api-docs",
 
             "/auth/swagger-ui/**",
             "/auth/swagger-ui.html",
