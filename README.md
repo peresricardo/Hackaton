@@ -27,6 +27,45 @@ Todos os micros serviços foram desenvolvidos utlizando a versão <b>21 do Java 
 - [x] Service-Cartao
 - [x] Service-Pagamento
 
+
+### Serviço de Discovery
+srvDiscover - O objetivo desse serviço é registrar todos os serviços utilizados no projeto para facilitar a localização e manutenção dos serviços. A rastreabilidade dos serviços se torna rápida e eficaz para eventuais manutenções.
+Para acessar a página do discovery: http://localhost:8761
+
+### Serviço de Gateway
+srvGateway - O objetivo desse serviço é disponibilizar para o cliente um único local de chamada para os serviços utilizados no projeto, centralizando todos os serviços em um único endereço e porta ip.
+Para acessar os serviços: http://localhost:8080
+
+### Serviço de Autenticação
+srvAutenticacao - O objetivo desse serviço é registrar o usuário que irá utilizar os serviços do projeto e irá gerar um token de autenticação para validação nos serviços.
+Automaticamente o sistema já cria um usuário para efetuar o login e gerar o token, dados para efetuar login:<br><br>
+{
+"login": "adj2",
+"password": "adj@1234"
+}
+
+Para acessar o serviço:
+http://localhost:8080/api/auth
+
+
+### Serviço de Clientes
+srvCliente - O objetivo desse serviço é disponibilizar uma api para que o usuário possa fazer a manutenção do CRU de clientes.
+
+Para acessar o serviço:
+http://localhost:8080/api/cliente
+
+### Serviço de Cartões
+srvCartao - O objetivo desse serviço é disponibilizar uma api para que o usuário possa fazer a inclusão de cartão. Faz conexão com o serviço de cliente utilizando a tecnologia Sprint OpenFeign para fazer a validação do cliente existente ou não.
+
+Para acessar o serviço:
+http://localhost:8080/cartao
+
+### Serviço de Pagamento
+srvPagamento - O objetivo desse serviço é disponibilizar uma api para efetuar o gerenciamento do pagamento da fase do hackaton. Faz conexão com os serviços de cliente e cartão utilizando a tecnologia Spring OpenFeign para fazer as validações do cliente existente ou não ou se o cartão é válido.
+
+Para acessar o serviço:
+http://localhost:8080/pagamento
+
 <hr>
 
 ## PostgreSql
@@ -57,10 +96,10 @@ git clone https://github.com/peresricardo/Hackaton.git
 
 #### Limpar, compilar e gerar imagem para o docker
 
-Na raiz do projeto existe um arquivo chamado buildAll.bat, executando esse arquivo ele irá
+Na raiz do projeto existe um arquivo chamado <strong>buildAll.bat</strong>, executando esse arquivo ele irá
 fazer o build, gerar a imagem docker automaticamente de todos os serviços.
 
-Para executar o arquivo buildAll.bat execute um prompt de command "cmd"
+Para executar o arquivo <strong>buildAll.bat</strong> execute um prompt de command "cmd"
 vá para a pasta onde baixou o projeto e execute o comando:
 ```sh
 buildAll
