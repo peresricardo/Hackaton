@@ -52,7 +52,7 @@ class PagamentoControllerTest {
     void testCadastrarPagamento() {
         when(pagamentoService.cadastrarPagamento(any(Pagamento.class))).thenReturn(pagamento);
 
-        ResponseEntity<Pagamento> response = pagamentoController.cadastrarPagamento(pagamento);
+        ResponseEntity<?> response = pagamentoController.cadastrarPagamento(pagamento);
 
         assertEquals(201, response.getStatusCodeValue());
         assertEquals(pagamento, response.getBody());
@@ -62,7 +62,7 @@ class PagamentoControllerTest {
     void testListaPagamentosPorCliente() {
         when(pagamentoService.listaPagamentosPorCliente(anyString())).thenReturn(Collections.singletonList(pagamentoDto));
 
-        ResponseEntity<List<PagamentoPorClienteDto>> response = pagamentoController.listaPagamentosPorCliente("12345678900");
+        ResponseEntity<?> response = pagamentoController.listaPagamentosPorCliente("12345678900");
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(Collections.singletonList(pagamentoDto), response.getBody());
