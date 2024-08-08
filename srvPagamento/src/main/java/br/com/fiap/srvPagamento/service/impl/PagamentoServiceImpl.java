@@ -3,6 +3,7 @@ package br.com.fiap.srvPagamento.service.impl;
 import br.com.fiap.srvPagamento.client.CartaoEndpointService;
 import br.com.fiap.srvPagamento.dto.CartaoDto;
 import br.com.fiap.srvPagamento.dto.PagamentoPorClienteDto;
+import br.com.fiap.srvPagamento.exception.LimiteCartaoException;
 import br.com.fiap.srvPagamento.exception.MensagemNotFoundException;
 import br.com.fiap.srvPagamento.model.Pagamento;
 import br.com.fiap.srvPagamento.repository.PagamentoRepository;
@@ -35,7 +36,7 @@ public class PagamentoServiceImpl implements PagamentoService {
         } else if (!cartaoDto.getCpf().equals(pagamento.getCpf())) {
             throw new MensagemNotFoundException("Cartão não pertence a esse cliente");
         } else if (cartaoDto.getLimite().compareTo(pagamento.getValor()) < 0) {
-            throw new MensagemNotFoundException("Limite insuficiente para a compra");
+            throw new LimiteCartaoException("Limite insuficiente para a compra");
         } else if (!cartaoDto.getCvv().equals(pagamento.getCvv())) {
             throw new MensagemNotFoundException("Código CVV incorreto, compra recusada");
         }

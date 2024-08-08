@@ -1,6 +1,8 @@
 package br.com.fiap.srvPagamento.controller;
 
 import br.com.fiap.srvPagamento.dto.PagamentoPorClienteDto;
+import br.com.fiap.srvPagamento.exception.LimiteCartaoException;
+import br.com.fiap.srvPagamento.exception.MensagemNotFoundException;
 import br.com.fiap.srvPagamento.model.Pagamento;
 import br.com.fiap.srvPagamento.service.PagamentoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,16 +24,27 @@ public class PagamentoController {
 
     @PostMapping
     @Operation(summary = "Efetua a inclusão de um novo Pagamento", method = "POST")
-    public ResponseEntity<Pagamento> cadastrarPagamento(@Valid @RequestBody Pagamento pagamento) {
-        var pagamentoNovo = pagamentoService.cadastrarPagamento(pagamento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoNovo);
+    public ResponseEntity<?> cadastrarPagamento(@Valid @RequestBody Pagamento pagamento) {
+        try {
+            var pagamentoNovo = pagamentoService.cadastrarPagamento(pagamento);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoNovo);
+        } catch (MensagemNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
+        } catch (LimiteCartaoException ex) {
+            return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(ex);
+        }
     }
 
     @GetMapping("/cliente/{cpf}")
     @Operation(summary = "Lista Pagamentos de um determinado cliente", method = "GET")
-    public ResponseEntity<List<PagamentoPorClienteDto>> listaPagamentosPorCliente(@PathVariable String cpf) {
-        List<PagamentoPorClienteDto> pagamentos = pagamentoService.listaPagamentosPorCliente(cpf);
-        return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
+    public ResponseEntity<?> listaPagamentosPorCliente(@PathVariable String cpf) {
+        try {
+            List<PagamentoPorClienteDto> pagamentos = pagamentoService.listaPagamentosPorCliente(cpf);
+            return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
+        } catch (MensagemNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
+        }
+
     }
 
 }
