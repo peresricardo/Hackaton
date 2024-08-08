@@ -15,10 +15,10 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Verifica se o usuário admin já existe
-        if (userRepository.findByLogin("admin") == null) {
+        if (userRepository.findByLogin("adj2") == null) {
             User admin = new User();
-            admin.setLogin("admin");
-            admin.setPassword("admin123");
+            admin.setLogin("adj2");
+            admin.setPassword("adj@1234");
             userRepository.save(admin);
             System.out.println("Usuário admin criado com sucesso!");
         } else {
