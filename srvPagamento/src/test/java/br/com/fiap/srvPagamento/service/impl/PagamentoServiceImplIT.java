@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -109,5 +110,16 @@ class PagamentoServiceImplIT {
         assertEquals(2, pagamentos.size());
         assertEquals(new BigDecimal("100"), pagamentos.get(0).getValor());
         assertEquals(new BigDecimal("200"), pagamentos.get(1).getValor());
+    }
+
+    @Test
+    void testCadastrarPagamentoErroServidor() {
+        when(clienteService.existeCliente(anyString())).thenThrow(new RuntimeException("Internal Server Error"));
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            pagamentoService.cadastrarPagamento(pagamento);
+        });
+
+        assertEquals("Falha ao acessar endopoint cliente.", exception.getMessage());
     }
 }

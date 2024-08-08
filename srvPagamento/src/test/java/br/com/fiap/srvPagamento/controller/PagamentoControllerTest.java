@@ -1,6 +1,8 @@
 package br.com.fiap.srvPagamento.controller;
 
 import br.com.fiap.srvPagamento.dto.PagamentoPorClienteDto;
+import br.com.fiap.srvPagamento.exception.LimiteCartaoException;
+import br.com.fiap.srvPagamento.exception.MensagemNotFoundException;
 import br.com.fiap.srvPagamento.model.Pagamento;
 import br.com.fiap.srvPagamento.service.PagamentoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,7 +55,7 @@ class PagamentoControllerTest {
 
         ResponseEntity<?> response = pagamentoController.cadastrarPagamento(pagamento);
 
-        assertEquals(201, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCodeValue());
         assertEquals(pagamento, response.getBody());
     }
 
@@ -66,5 +67,41 @@ class PagamentoControllerTest {
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(Collections.singletonList(pagamentoDto), response.getBody());
+    }
+
+    @Test
+    void testCadastrarPagamentoNaoAutorizado() {
+        when(pagamentoService.cadastrarPagamento(any(Pagamento.class))).thenThrow(new SecurityException("Unauthorized"));
+
+        ResponseEntity<?> response = pagamentoController.cadastrarPagamento(pagamento);
+
+        assertEquals(401, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testListaPagamentosPorClienteNaoAutorizado() {
+        when(pagamentoService.listaPagamentosPorCliente(anyString())).thenThrow(new SecurityException("Unauthorized"));
+
+        ResponseEntity<?> response = pagamentoController.listaPagamentosPorCliente("12345678900");
+
+        assertEquals(401, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testCadastrarPagamentoErroServidor() {
+        when(pagamentoService.cadastrarPagamento(any(Pagamento.class))).thenThrow(new RuntimeException("Internal Server Error"));
+
+        ResponseEntity<?> response = pagamentoController.cadastrarPagamento(pagamento);
+
+        assertEquals(500, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testListaPagamentosPorClienteErroServidor() {
+        when(pagamentoService.listaPagamentosPorCliente(anyString())).thenThrow(new RuntimeException("Internal Server Error"));
+
+        ResponseEntity<?> response = pagamentoController.listaPagamentosPorCliente("123456278900");
+
+        assertEquals(500, response.getStatusCodeValue());
     }
 }

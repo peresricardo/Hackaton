@@ -27,11 +27,13 @@ public class PagamentoController {
     public ResponseEntity<?> cadastrarPagamento(@Valid @RequestBody Pagamento pagamento) {
         try {
             var pagamentoNovo = pagamentoService.cadastrarPagamento(pagamento);
-            return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoNovo);
-        } catch (MensagemNotFoundException ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
+            return ResponseEntity.status(HttpStatus.OK).body(pagamentoNovo);
         } catch (LimiteCartaoException ex) {
             return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(ex);
+        } catch (SecurityException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
         }
     }
 
@@ -41,10 +43,11 @@ public class PagamentoController {
         try {
             List<PagamentoPorClienteDto> pagamentos = pagamentoService.listaPagamentosPorCliente(cpf);
             return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
-        } catch (MensagemNotFoundException ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
+        } catch (SecurityException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-
     }
 
 }

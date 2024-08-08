@@ -60,7 +60,7 @@ class PagamentoControllerIT {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/pagamentos")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(pagamento)))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.cpf").value("12345678900"))
                 .andExpect(jsonPath("$.numero").value("4111111111111111"))
                 .andExpect(jsonPath("$.cvv").value("123"))
@@ -80,6 +80,48 @@ class PagamentoControllerIT {
                 .andExpect(jsonPath("$[0].metodoPagamento").value("cartão de crédito"))
                 .andExpect(jsonPath("$[0].descricao").value("compra"))
                 .andExpect(jsonPath("$[0].status").value("aprovado"))
+                .andDo(print());
+    }
+
+    @Test
+    void testCadastrarPagamentoNaoAutorizado() throws Exception {
+        when(pagamentoService.cadastrarPagamento(any(Pagamento.class))).thenThrow(new SecurityException("Unauthorized"));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/pagamentos")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(pagamento)))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(print());
+    }
+
+    @Test
+    void testListaPagamentosPorClienteNaoAutorizado() throws Exception {
+        when(pagamentoService.listaPagamentosPorCliente(anyString())).thenThrow(new SecurityException("Unauthorized"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/pagamentos/cliente/12345678900")
+                        .contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andDo(print());
+    }
+
+    @Test
+    void testCadastrarPagamentoErroServidor() throws Exception {
+        when(pagamentoService.cadastrarPagamento(any(Pagamento.class))).thenThrow(new RuntimeException("Internal Server Error"));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/pagamentos")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(pagamento)))
+                .andExpect(MockMvcResultMatchers.status().isInternalServerError())
+                .andDo(print());
+    }
+
+    @Test
+    void testListaPagamentosPorClienteErroServidor() throws Exception {
+        when(pagamentoService.listaPagamentosPorCliente(anyString())).thenThrow(new RuntimeException("Internal Server Error"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/pagamentos/cliente/12345678900")
+                        .contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isInternalServerError())
                 .andDo(print());
     }
 }

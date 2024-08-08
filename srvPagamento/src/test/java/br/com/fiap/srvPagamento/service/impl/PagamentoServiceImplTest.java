@@ -4,6 +4,7 @@ import br.com.fiap.srvPagamento.client.CartaoEndpointService;
 import br.com.fiap.srvPagamento.client.ClienteEndpointService;
 import br.com.fiap.srvPagamento.dto.CartaoDto;
 import br.com.fiap.srvPagamento.dto.PagamentoPorClienteDto;
+import br.com.fiap.srvPagamento.exception.LimiteCartaoException;
 import br.com.fiap.srvPagamento.exception.MensagemNotFoundException;
 import br.com.fiap.srvPagamento.model.Pagamento;
 import br.com.fiap.srvPagamento.repository.PagamentoRepository;
@@ -87,7 +88,6 @@ class PagamentoServiceImplTest {
         Exception exception = assertThrows(MensagemNotFoundException.class, () -> {
             pagamentoService.cadastrarPagamento(pagamento);
         });
-
         assertEquals("Cartão não pertence a esse cliente", exception.getMessage());
     }
 
@@ -105,7 +105,7 @@ class PagamentoServiceImplTest {
         when(clienteService.existeCliente(anyString())).thenReturn(ResponseEntity.ok(true));
         when(cartaoService.cartaoPorNumero(anyString())).thenReturn(ResponseEntity.ok(cartaoDto));
 
-        Exception exception = assertThrows(MensagemNotFoundException.class, () -> {
+        Exception exception = assertThrows(LimiteCartaoException.class, () -> {
             pagamentoService.cadastrarPagamento(pagamento);
         });
 
